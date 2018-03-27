@@ -20,8 +20,7 @@ def roman_numeral_valid(roman_string):
 
 def roman_numeral_to_number(roman_string):
     '''calculates the value of a Roman numeral'''
-    numeral_value = {'I': 1, 'V': 5, 'X': 10,
-                     'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    numeral_value = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
     total = 0
     for idx in range(len(roman_string)):
         # last numeral: add value
