@@ -36,7 +36,7 @@ def roman_numeral_to_number(roman_string):
                 total += numeral_value[roman_string[idx]]
     return total
 
-def roman_numeral_program():
+def run_programme():
     text_input = input('Roman numeral input: ')
     if roman_numeral_valid(text_input):
         roman_numeral_value = roman_numeral_to_number(text_input)
