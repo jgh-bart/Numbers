@@ -121,7 +121,7 @@ def num_string_to_chunked_num(number_string):
                 output += num_string_to_word_seq(chunk[idx])
         return output
 
-def run_programme():
+def run():
     num_input = input('numerical input: ')
     print 'INPUT:      ', num_input
     print 'NUMBER:     ', num_string_to_word_seq(num_input)
