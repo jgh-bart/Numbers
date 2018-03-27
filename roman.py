@@ -6,12 +6,12 @@ def roman_numeral_valid(roman_string):
     validity = False
     # traditional Roman numeral
     # permitted subtractions: CM, CD, XC, XL, IX, IV
-    if re.match(r'^M{0,4}(CM|CD|D?C{0,4})?(XC|XL|L?X{0,4})?(IX|IV|V?I{0,4})?$', roman_string):
+    if re.match(r'^M{0,4}(CM|CD|D?C{0,4})(XC|XL|L?X{0,4})(IX|IV|V?I{0,4})$', roman_string):
         print roman_string, '- MATCH: traditional Roman numeral'
         validity = True
     # Roman numeral with all subtractions permitted:
     # [C,L,X,V,I] from [M,D]; [X,V,I] from [C,L], IX, IV
-    elif re.match(r'^(M{0,4}([CLXVI][MD]|D?C{0,4})?([XVI][CL]|L?X{0,4})?(IX|IV|V?I{0,4})?)$', roman_string):
+    elif re.match(r'^M{0,4}([CLXVI][MD]|D?C{0,4})([XVI][CL]|L?X{0,4})(IX|IV|V?I{0,4})$', roman_string):
         print roman_string, '- MATCH: Roman numeral with alternative subtractions'
         validity = True
     else:
@@ -35,7 +35,7 @@ def roman_numeral_to_number(roman_string):
                 total += numeral_value[roman_string[idx]]
     return total
 
-def run_programme():
+def run():
     text_input = input('Roman numeral input: ')
     if roman_numeral_valid(text_input):
         roman_numeral_value = roman_numeral_to_number(text_input)
