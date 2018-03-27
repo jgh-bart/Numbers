@@ -163,7 +163,7 @@ def run():
     if not string_to_number(num_input):
         raise TypeError('invalid input: not a number')
     print 'NUMBER:     ', num_string_to_word_seq(num_input)
-    if type(string_to_number(num_input)) != int or string_to_number(num_input) <= 1:
+    if type(string_to_number(num_input)) != int or string_to_number(num_input) <= 0:
         print 'ORDINAL:     NO VALID ORDINAL (not a positive integer)'
     else:
         print 'ORDINAL:    ', num_string_to_ordinal(num_input)
