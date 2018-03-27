@@ -24,8 +24,11 @@ tens_dict    = {2: 'twenty',
                 9: 'ninety'}
 
 def num_to_word_seq(number):
+    '''maps number (int or float) to word sequence'''
     if number < 0:
         return ['minus'] + num_to_word_seq(abs(number))
+    elif number % 1.0 > 0:
+        return num_to_word_seq(int(number)) + ['point'] + num_string_to_digits(str(number).split('.')[1])
     elif number <= 15:
         return [numbers_dict[number]]
     elif number <= 19:
@@ -54,16 +57,32 @@ def num_to_word_seq(number):
             output += num_to_word_seq((number % 1000))
         return output
 
+def string_to_number(string):
+    '''
+    function to map a string to a number
+    (int if possible, otherwise float)
+    '''
+    try:
+        int(string)
+        return int(string)
+    except ValueError:
+        pass
+    try:
+        float(string)
+        return float(string)
+    except ValueError:
+        pass
+
 def num_string_to_word_seq(number_string):
-    return num_to_word_seq(int(number_string))
+    return num_to_word_seq(string_to_number(number_string))
 
 def num_string_to_ordinal(number_string):
-    word_seq = num_to_word_seq(int(number_string))
+    word_seq = num_string_to_word_seq(number_string)
     # replace last word with ordinal equivalent: first, second, third
     dict_123 = {'one': 'first', 'two': 'second', 'three': 'third'}
     if word_seq[-1] in dict_123:
         output = word_seq[:-1] + [dict_123[word_seq[-1]]]
-    # replace last word with ordinal equivalent: -th forms
+    # replace last with with ordinal equivalent: -th forms
     else:
         output = word_seq[:]
         # deletion: 't' (8th), 'e' (9th)
@@ -87,6 +106,8 @@ def num_string_to_digits(number_string, zero_word = 'zero'):
             # for "0", use zero_word
             if digit == '0':
                 output.append(zero_word)
+            elif digit == '.':
+                output.append('point')
             else:
                 output.append(numbers_dict[int(digit)])
         return output
@@ -94,6 +115,9 @@ def num_string_to_digits(number_string, zero_word = 'zero'):
 def num_string_to_chunked_num(number_string):
     if number_string[0] == '-':
         return ['minus'] + num_string_to_chunked_num(number_string[1:])
+    elif '.' in number_string:
+        number_split = number_string.split('.')
+        return num_string_to_chunked_num(number_split[0]) + ['point'] + num_string_to_digits(number_split[1])
     if number_string == '0':
         return ['zero']
     else:
