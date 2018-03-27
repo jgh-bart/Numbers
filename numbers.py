@@ -24,7 +24,9 @@ tens_dict    = {2: 'twenty',
                 9: 'ninety'}
 
 def num_to_word_seq(number):
-    '''maps number (int or float) to word sequence'''
+    '''
+    maps number (int or float) to numerical word sequence
+    '''
     if number < 0:
         return ['minus'] + num_to_word_seq(abs(number))
     elif number % 1.0 > 0:
@@ -59,7 +61,7 @@ def num_to_word_seq(number):
 
 def string_to_number(string):
     '''
-    function to map a string to a number
+    maps string to number
     (int if possible, otherwise float)
     '''
     try:
@@ -77,6 +79,10 @@ def num_string_to_word_seq(number_string):
     return num_to_word_seq(string_to_number(number_string))
 
 def num_string_to_ordinal(number_string):
+    '''
+    maps number string to ordinal word sequence,
+    calling num_to_word_seq function and replacing final word
+    '''
     word_seq = num_string_to_word_seq(number_string)
     # replace last word with ordinal equivalent: first, second, third
     dict_123 = {'one': 'first', 'two': 'second', 'three': 'third'}
@@ -98,6 +104,9 @@ def num_string_to_ordinal(number_string):
     return output
 
 def num_string_to_digits(number_string, zero_word = 'zero'):
+    '''
+    maps number string to digit-by-digit word sequence
+    '''
     if number_string[0] == '-':
         return ['minus'] + num_string_to_digits(number_string[1:])
     else:
@@ -113,6 +122,9 @@ def num_string_to_digits(number_string, zero_word = 'zero'):
         return output
 
 def num_string_to_chunked_num(number_string):
+    '''
+    maps number string to word sequence representing 2-digit chunked form
+    '''
     if number_string[0] == '-':
         return ['minus'] + num_string_to_chunked_num(number_string[1:])
     elif '.' in number_string:
@@ -146,9 +158,14 @@ def num_string_to_chunked_num(number_string):
         return output
 
 def run():
-    num_input = input('numerical input: ')
+    #num_input = input('numerical input: ')
     print 'INPUT:      ', num_input
+    if not string_to_number(num_input):
+        raise TypeError('invalid input: not a number')
     print 'NUMBER:     ', num_string_to_word_seq(num_input)
-    print 'ORDINAL:    ', num_string_to_ordinal(num_input)
+    if type(string_to_number(num_input)) != int or string_to_number(num_input) <= 1:
+        print 'ORDINAL:     NO VALID ORDINAL (not a positive integer)'
+    else:
+        print 'ORDINAL:    ', num_string_to_ordinal(num_input)
     print 'DIGITS:     ', num_string_to_digits(num_input, zero_word = 'zero')
     print 'CHUNKED NUM:', num_string_to_chunked_num(num_input)
