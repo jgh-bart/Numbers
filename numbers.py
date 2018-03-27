@@ -121,10 +121,10 @@ def num_string_to_chunked_num(number_string):
                 output += num_string_to_word_seq(chunk[idx])
         return output
 
-num_input = '1305'
-def run_programme(num_input):
+def run_programme():
+    num_input = input('numerical input: ')
     print 'INPUT:      ', num_input
     print 'NUMBER:     ', num_string_to_word_seq(num_input)
     print 'ORDINAL:    ', num_string_to_ordinal(num_input)
-    print 'DIGITS:     ', num_string_to_digits(num_input)
+    print 'DIGITS:     ', num_string_to_digits(num_input, zero_word = 'zero')
     print 'CHUNKED NUM:', num_string_to_chunked_num(num_input)
