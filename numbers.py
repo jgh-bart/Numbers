@@ -63,7 +63,7 @@ def num_string_to_ordinal(number_string):
     dict_123 = {'one': 'first', 'two': 'second', 'three': 'third'}
     if word_seq[-1] in dict_123:
         output = word_seq[:-1] + [dict_123[word_seq[-1]]]
-    # replace last with with ordinal equivalent: -th forms
+    # replace last word with ordinal equivalent: -th forms
     else:
         output = word_seq[:]
         # deletion: 't' (8th), 'e' (9th)
