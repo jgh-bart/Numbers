@@ -158,7 +158,7 @@ def num_string_to_chunked_num(number_string):
         return output
 
 def run():
-    #num_input = input('numerical input: ')
+    num_input = input('numerical input: ')
     print 'INPUT:      ', num_input
     if not string_to_number(num_input):
         raise TypeError('invalid input: not a number')
