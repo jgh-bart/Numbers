@@ -6,12 +6,12 @@ def roman_numeral_valid(roman_string):
     validity = False
     # traditional Roman numeral
     # permitted subtractions: CM, CD, XC, XL, IX, IV
-    if re.match(r'^(M{1,4}(CM|CD|DC{0,4}|C{1,4})?(XC|XL|LX{0,4}|X{1,4})?(IX|IV|VI{0,4}|I{1,4})?)$|^((CM|CD|DC{0,4}|C{1,4})(XC|XL|LX{0,4}|X{1,4})?(IX|IV|VI{0,4}|I{1,4})?)$|^((XC|XL|LX{0,4}|X{1,4})(IX|IV|VI{0,4}|I{1,4})?)$|^(IX|IV|VI{0,4}|I{1,4})$', roman_string):
+    if re.match(r'^M{0,4}(CM|CD|D?C{0,4})?(XC|XL|L?X{0,4})?(IX|IV|V?I{0,4})?$', roman_string):
         print roman_string, '- MATCH: traditional Roman numeral'
         validity = True
     # Roman numeral with all subtractions permitted:
     # [C,L,X,V,I] from [M,D]; [X,V,I] from [C,L], IX, IV
-    elif re.match(r'^(M{1,4}([CLXVI][MD]|DC{0,4}|C{1,4})?([XVI][CL]|LX{0,4}|X{1,4})?(IX|IV|VI{0,4}|I{1,4})?)$|^(([CLXVI][MD]|DC{0,4}|C{1,4})([XVI][CL]|LX{0,4}|X{1,4})?(IX|IV|VI{0,4}|I{1,4})?)$|^(([XVI][CL]|LX{0,4}|X{1,4})(IX|IV|VI{0,4}|I{1,4})?)$|^(IX|IV|VI{0,4}|I{1,4})$', roman_string):
+    elif re.match(r'^(M{0,4}([CLXVI][MD]|D?C{0,4})?([XVI][CL]|L?X{0,4})?(IX|IV|V?I{0,4})?)$', roman_string):
         print roman_string, '- MATCH: Roman numeral with alternative subtractions'
         validity = True
     else:
